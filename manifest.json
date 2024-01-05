@@ -1,0 +1,23 @@
+{
+    "manifest_version": 3,
+    "name": "Button Highlighter",
+    "version": "1.0",
+    "description": "Highlights a button on the webpage with the same name as the given keyword.",
+    "permissions": [
+      "activeTab"
+    ],
+    "action": {
+      "default_icon": "icon.png",
+      "default_popup": "popup.html"
+    },
+    "icons": {
+      "48": "icon.png",
+      "128": "icon.png"
+    },
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["content.js"]
+      }
+    ]
+}
