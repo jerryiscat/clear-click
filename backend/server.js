@@ -2,6 +2,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const axios = require('axios');
 const app = express();
+
+const website = "youtube";
+
 require('dotenv').config();
 
 
@@ -10,12 +13,32 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 
 const cors = require('cors');
+const fs = require('fs');
+
+// Read the JSON file
+const jsonData = fs.readFileSync('map.json', 'utf8');
+const parsedData = JSON.parse(jsonData);
+let mappings;
+if (parsedData.website === website) {
+  mappings = parsedData.mappings;
+  console.log("Successfully found mapping.")
+  // mappings.forEach(mapping => {
+  //   const mappingObject = {
+  //     function: mapping.function,
+  //     path: mapping.path.join(" > ")
+  //   };
+  //   mappingsArray.push(mappingObject);
+  // });
+}  else {
+  console.log("No mappings found for the specified website.");
+}
+console.log("111");
 
 app.use(cors((req, callback) => {
   let corsOptions;
   const allowedOrigins = ['http://localhost:3000', 'chrome-extension:'];
   if (allowedOrigins.includes(req.header('Origin'))) {
-    corsOptions = { origin: true }; 
+    corsOptions = { origin: true };
   } else {
     corsOptions = { origin: false }; 
   }
@@ -27,10 +50,25 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
-const key = process.env.OPENAI_API_KE
+const key = process.env.OPENAI_API_KEY;
 
 app.post('/send-prompt', async (req, res) => {
-  const prompt = req.body.prompt;
+  let keyIndex = 0;
+  let prompt = "You are a helpful assistant for website navigation. Assuming you";
+  prompt += " are inside " + website + " webiste, given the following tasks options: ";
+  mappings.forEach(mapping => {
+    const functionValue = mapping.function;
+    prompt += "\n" + keyIndex + ": ";
+    prompt += "" + functionValue + ", ";
+    keyIndex++;
+  });
+  prompt += ". Try to determine which of the options the following prompt trying to achieve, ";
+  prompt += "Please choose the option by only entering the index number ";
+  const options = "(" + generateNumberString(keyIndex) + "). And without explanation.";
+  prompt += options + "if the prompt is unclear or you couldn't decide which option it belongs, "
+  prompt += "please output: \"Your input is unclear, please re-enter your input\"";
+  prompt += "The prompt is following: " + req.body.prompt + ". ";
+  console.log("n = " + keyIndex);
   try {
       const response = await fetch('https://api.openai.com/v1/chat/completions', 
           {
@@ -51,11 +89,34 @@ app.post('/send-prompt', async (req, res) => {
           });
         
       const data = await response.json();
-      console.log(data.choices[0].message.content);
+      const apiResponse = data.choices[0].message.content;
       
-      res.send(data.choices[0].message.content);
+      console.log(apiResponse);
+      
+      if (apiResponse.indexOf("re-enter") !== -1) {
+        //console.log(1);
+        res.send(apiResponse);
+        
+      } else {
+        //console.log(2);
+        const firstChar = apiResponse[0];
+        const result = parseInt(firstChar, 10);
+        console.log(result);
+        const path = mappings[result].path;
+        console.log(path);
+        res.send(path);
+      }
   } catch (error) {
     console.error('Error in calling OpenAI API:', error.message);
     res.status(500).send('Error processing your request');
   }
 });
+
+function generateNumberString(n) {
+  let result = "";
+  for (let i = 0; i < n; i++) {
+    result += i + ", ";
+  }
+  // Remove the trailing comma and space
+  return result.slice(0, -2);
+}
