@@ -1,0 +1,25 @@
+{
+  "website": "youtube",
+  "mappings": [
+    {
+      "function": "subscribe to premium",
+      "path": ["sidebar", "youtube premium", "try it free", "select", "confirm", "select", "start 1-month trial", "input"]
+    },
+    {
+      "function": "back to homepage",
+      "path": ["youtube"]
+    },
+    {
+      "function": "sign out",
+      "path": ["profile", "sign out"]
+    },
+    {
+      "function": "turn on notification",
+      "path": ["sidebar", "settings", "notifications", "get notifications in this browser"]
+    },
+    {
+      "function": "change language",
+      "path": ["profile", "language: english", "select"]
+    }
+  ]
+}
