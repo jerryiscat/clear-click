@@ -6,6 +6,18 @@
 //     });
 // });
 
+// handle click and update currentIndex
+document.addEventListener('click', function(event) {
+        console.log(event.target.textContent);
+        if (event.target.textContent.toLowerCase().includes("test button")) {
+            var currentStoredIndex = parseInt(localStorage.getItem('currentIndex')) || 0;
+            var newCurrentIndex = currentStoredIndex + 1;
+            localStorage.setItem('currentIndex', newCurrentIndex.toString());
+            console.log(localStorage.getItem('currentIndex'));
+            //call highlight
+        }
+});
+
 document.getElementById('startNavigate').addEventListener('click', function() {
   var testButton = document.getElementById('test-button');
     if (testButton.style.border === '4px solid #C464FF') {
