@@ -14,11 +14,12 @@ if (!('webkitSpeechRecognition' in window)) {
   recognition.onstart = function() {
     document.querySelectorAll('span').forEach(span => span.style.backgroundColor = '#C464FF');
     recognizing = true;
-    micButton.style.backgroundColor = '#C464FF';
+    myData = "Listening";
   };
 
   recognition.onerror = function(event) {
     console.error('Speech recognition error', event);
+    myData = "";
   };
 
   recognition.onend = function() {
