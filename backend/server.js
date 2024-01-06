@@ -4,6 +4,7 @@ const axios = require('axios');
 const app = express();
 
 const website = "washington government website";
+// const website = "youtube";
 
 require('dotenv').config();
 
@@ -64,7 +65,7 @@ app.post('/send-prompt', async (req, res) => {
   prompt += options + "if the prompt is unclear or you couldn't decide which option it belongs, "
   prompt += "please output: \"Your input is unclear, please re-enter your input\"";
   prompt += "The prompt is following: " + req.body.prompt + ". ";
-  console.log("n = " + keyIndex);
+  //console.log("n = " + keyIndex);
   try {
       const response = await fetch('https://api.openai.com/v1/chat/completions', 
           {
@@ -87,19 +88,13 @@ app.post('/send-prompt', async (req, res) => {
       const data = await response.json();
       const apiResponse = data.choices[0].message.content;
       
-      console.log(apiResponse);
-      
       if (apiResponse.indexOf("re-enter") !== -1) {
-        //console.log(1);
         res.send(apiResponse);
         
       } else {
-        //console.log(2);
         const firstChar = apiResponse[0];
         const result = parseInt(firstChar, 10);
-        console.log(result);
         const path = mappings[result].path;
-        console.log(path);
         res.send(path);
       }
   } catch (error) {

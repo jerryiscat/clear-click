@@ -10,6 +10,7 @@ if (!('webkitSpeechRecognition' in window)) {
   const recognition = new webkitSpeechRecognition();
   recognition.continuous = true;
   recognition.interimResults = true;
+  recognition.lang = 'en-US';
 
   recognition.onstart = function() {
     document.querySelectorAll('span').forEach(span => span.style.backgroundColor = '#C464FF');
@@ -80,6 +81,10 @@ document.getElementById('startNavigate').addEventListener('click', async functio
         chrome.tabs.sendMessage(tabs[0].id, { action: 'highlightButton', keyword: firstStep });
     });
 
+    localStorage.setItem('currentIndex', "0");
+    localStorage.setItem('route', JSON.stringify(route));
+
+
     var testButton = document.getElementById('test-button');
     if (testButton.style.border === '4px solid #C464FF') {
         testButton.style.border = ''; // Revert to original or specify a different style
@@ -90,7 +95,10 @@ document.getElementById('startNavigate').addEventListener('click', async functio
 
 document.getElementById('test-button').addEventListener('click', function() {
   var testButton = document.getElementById('test-button');
-  console.log(localStorage.getItem('currentIndex'));
+  let currentIndex= localStorage.getItem('currentIndex');
+  let retrievedArray = JSON.parse(localStorage.getItem('route'));
+  console.log("index: " + currentIndex);
+  console.log(retrievedArray);
   testButton.style.border = '';
 });
   

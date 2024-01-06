@@ -12,7 +12,7 @@ body {
 }
 
 .icon-button-container {
-        position: relative;
+      position: relative;
       display: flex;
       align-items: center;
  }
@@ -103,7 +103,7 @@ body {
 
 
 #startNavigate.icon-button {
-  display: inline;
+  display: inline-flex;
   align-items: center;
 }
 
@@ -112,7 +112,6 @@ body {
   width: 40px; 
   margin-right: 5px;
 }
-
 
 
 
