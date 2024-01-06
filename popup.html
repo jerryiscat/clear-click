@@ -5,21 +5,40 @@
   <link rel="stylesheet" type="text/css" href="popup.css">
 </head>
 <body>
-<h1>Button Highlighter</h1>
-<label for="gptPrompt"></label>
-<textarea placeholder="Enter the task you wish to accomplish" id="gptPrompt" rows="4" cols="50"></textarea><br>
-<button id="micButton">audio</button><br>
-<div class="loader">
-  <span></span>
-  <span></span>
-  <span></span>
-</div>
-<button id="sendButton">Guide Me</button><br>
-<label for="responseArea">Result</label><br>
-<div id="responseArea"></div>
-<label for="keywordInput">Enter Keyword:(testing)</label>
-<input type="text" id="keywordInput">
-<button id="highlightButton">Highlight Button</button>
-<script src="popup.js"></script>
+  <div class="container">
+    <div class="branding">
+      <img src="images/ClearClick.png" alt="ClearClick" class="name">
+      <img src="images/logo.png" alt="logo" class="logo">
+    </div>
+    
+    <div class="textarea-container">
+      <textarea placeholder="Enter the task you wish to accomplish" id="gptPrompt" rows="5" cols="50"></textarea><br>
+      <!-- <button id="micBtn" class="icon-button">
+        <img src="images/mic.png" alt="Mic" class="icon">
+      </button> -->
+    </div>
+
+    <button id="micButton" class="icon-button">
+      <img src="images/mic.png" alt="Mic" class="icon">
+    </button>
+    <div class="loader">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <br>
+    
+    <!-- <button id="sendButton">Guide Me</button><br> -->
+    <div id="responseArea"></div>
+    <button id="startNavigate" class="icon-button">
+      <img src="images/nav.png" alt="Test" class="icon"> Start Navigation
+    </button>
+    <button id="test-button">Test Buttonn</button>
+  </div>
+
+  <label for="keywordInput">Enter Keyword:(testing)</label>
+  <input type="text" id="keywordInput">
+  <button id="highlightButton">Highlight Button</button>
+  <script src="popup.js"></script>
 </body>
 </html>
