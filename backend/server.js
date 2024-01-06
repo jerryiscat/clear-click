@@ -27,27 +27,33 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
-import OpenAI from "openai";
-
-const openai = new OpenAI();
-
+const key = process.env.OPENAI_API_KE
 
 app.post('/send-prompt', async (req, res) => {
   const prompt = req.body.prompt;
   try {
-    const response = await openai.chat.completions.create ({
-      messages: [{ role: "system", content: "You are a helpful website navigator." }],
-      model: "gpt-3.5-turbo",
-      prompt: prompt,
-    }, {
-      headers: {
-        'Authorization': `Bearer ${'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'}`
-      }
-    });
-    console.log(response.choices[0])
-    console.log(response.data)
+      const response = await fetch('https://api.openai.com/v1/chat/completions', 
+          {
+              method: 'POST',
+              headers: {
+                  'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                  model: "gpt-3.5-turbo",
 
-    res.json(response.data);
+                  // max_tokens: 200,
+                  messages: [
+                      { "role": "system", "content": "You are a helpful assistant." },
+                      { "role": "user", "content":  prompt }
+                  ]
+              }),
+          });
+        
+      const data = await response.json();
+      console.log(data.choices[0].message.content);
+      
+      res.send(data.choices[0].message.content);
   } catch (error) {
     console.error('Error in calling OpenAI API:', error.message);
     res.status(500).send('Error processing your request');
