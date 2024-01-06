@@ -57,6 +57,7 @@ if (!('webkitSpeechRecognition' in window)) {
 document.getElementById('sendButton').addEventListener('click', function() {
     const promptText = document.getElementById('gptPrompt').value;
     const prompt = `Answer in english: ${promptText}`;
+    console.log(prompt)
     fetch('http://localhost:3000/send-prompt', {
       method: 'POST',
       headers: {

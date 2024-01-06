@@ -27,16 +27,11 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
-import OpenAI from "openai";
-
-const openai = new OpenAI();
-
-
 app.post('/send-prompt', async (req, res) => {
   const prompt = req.body.prompt;
   try {
-    const response = await openai.chat.completions.create ({
-      messages: [{ role: "system", content: "You are a helpful website navigator." }],
+    const response = await axios.post('https://api.openai.com/v1/chat/completions ', {
+      messages: [{ role: "system", content: "You are a helpful assistant." }],
       model: "gpt-3.5-turbo",
       prompt: prompt,
     }, {
@@ -45,11 +40,10 @@ app.post('/send-prompt', async (req, res) => {
       }
     });
     console.log(response.choices[0])
-    console.log(response.data)
 
     res.json(response.data);
   } catch (error) {
-    console.error('Error in calling OpenAI API:', error.message);
+    console.error('Error in calling OpenAI API:', error);
     res.status(500).send('Error processing your request');
   }
 });
