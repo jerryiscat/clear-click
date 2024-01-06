@@ -7,7 +7,7 @@
     },
     {
       "function": "back to homepage",
-      "path": ["youtube"]
+      "path": ["home"]
     },
     {
       "function": "sign out",
