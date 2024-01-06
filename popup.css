@@ -7,7 +7,7 @@ body {
 
 
 .container {
-  max-width: 600px;
+  max-width: 200px;
   margin: 0 auto;
 }
 
@@ -68,18 +68,9 @@ body {
   cursor: pointer;
 }
 
-/* #micButton.icon-button {
-  position: absolute;
-  right: 5px;
-  top: 17px;
-} */
 
 #micButton img {
-  height: 30px; 
-  width: 30px; 
-}
-
-#micBtn img {
+  margin-top: 10px;
   height: 30px; 
   width: 30px; 
 }
