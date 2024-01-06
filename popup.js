@@ -66,7 +66,6 @@ document.getElementById('startNavigate').addEventListener('click', async functio
     .then(response => response.json())
     .then(data => {
       route = data
-      console.log("route: " + route)
       document.getElementById('responseArea').innerText = data;
     })
     .catch(error => {
@@ -74,16 +73,21 @@ document.getElementById('startNavigate').addEventListener('click', async functio
       document.getElementById('responseArea').innerText = "Your input is unclear, please re-enter your input.";
     });
 
+
+    chrome.storage.local.set({ currentIndex: 0 }, function() {
+      console.log('Value is set to', 0);
+    });
+
+    chrome.storage.local.set({ route: route }, function() {
+      console.log('route is set to', route);
+    });
+    
+
     const firstStep = route[0];
-    console.log(route);
     console.log(firstStep);
     chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
         chrome.tabs.sendMessage(tabs[0].id, { action: 'highlightButton', keyword: firstStep });
     });
-
-    localStorage.setItem('currentIndex', "0");
-    localStorage.setItem('route', JSON.stringify(route));
-
 
     var testButton = document.getElementById('test-button');
     if (testButton.style.border === '4px solid #C464FF') {
@@ -95,11 +99,14 @@ document.getElementById('startNavigate').addEventListener('click', async functio
 
 document.getElementById('test-button').addEventListener('click', function() {
   var testButton = document.getElementById('test-button');
-  let currentIndex= localStorage.getItem('currentIndex');
-  let retrievedArray = JSON.parse(localStorage.getItem('route'));
-  console.log("index: " + currentIndex);
-  console.log(retrievedArray);
   testButton.style.border = '';
+
+  chrome.storage.local.get(['currentIndex', 'route'], function(result) {
+      currentIndex = result.currentIndex || 0; 
+      retrievedArray = result.route; 
+      console.log("index: ", currentIndex);
+      console.log(retrievedArray);
+  });
 });
   
 
