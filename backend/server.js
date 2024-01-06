@@ -27,20 +27,21 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
+const key = process.env.OPENAI_API_KE
+
 app.post('/send-prompt', async (req, res) => {
   const prompt = req.body.prompt;
   try {
-    const response = await axios.post('https://api.openai.com/v1/chat/completions ', {
+    const response = await axios.post('https://api.openai.com/v1/chat/completions', {
       messages: [{ role: "system", content: "You are a helpful assistant." }],
       model: "gpt-3.5-turbo",
       prompt: prompt,
     }, {
       headers: {
-        'Authorization': `Bearer ${'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'}`
+        'Authorization': `Bearer ${key}`
       }
     });
-    console.log(response.choices[0])
-
+      console.log(response.data.choices[0]);
     res.json(response.data);
   } catch (error) {
     console.error('Error in calling OpenAI API:', error);
