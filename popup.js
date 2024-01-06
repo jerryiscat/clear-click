@@ -10,6 +10,7 @@ document.getElementById('highlightButton').addEventListener('click', function() 
 const micButton = document.getElementById('micButton');
 const gptPrompt = document.getElementById('gptPrompt');
 let recognizing = false;
+let timeoutId;
 
 if (!('webkitSpeechRecognition' in window)) {
   alert("Your browser doesn't support speech recognition. Try Chrome.");
@@ -19,7 +20,9 @@ if (!('webkitSpeechRecognition' in window)) {
   recognition.interimResults = true;
 
   recognition.onstart = function() {
+    document.querySelectorAll('span').forEach(span => span.style.backgroundColor = '#C464FF');
     recognizing = true;
+    micButton.style.backgroundColor = '#C464FF';
   };
 
   recognition.onerror = function(event) {
@@ -28,20 +31,28 @@ if (!('webkitSpeechRecognition' in window)) {
 
   recognition.onend = function() {
     recognizing = false;
+    micButton.style.backgroundColor = '';
+    document.querySelectorAll('span').forEach(span => span.style.backgroundColor = 'white');
   };
 
   recognition.onresult = function(event) {
-    let interim_transcript = '';
-    for (let i = event.resultIndex; i < event.results.length; ++i) {
-      if (event.results[i].isFinal) {
-        gptPrompt.value += event.results[i][0].transcript;
-      } else {
-        interim_transcript += event.results[i][0].transcript;
+    clearTimeout(timeoutId);
+    // let interim_transcript = '';
+    // for (let i = event.resultIndex; i < event.results.length; ++i) {
+    //   if (event.results[i].isFinal) {
+    //     gptPrompt.value += event.results[i][0].transcript;
+    //   } else {
+    //     interim_transcript += event.results[i][0].transcript;
+    //   }
+    gptPrompt.value = event.results[0][0].transcript;
+    timeoutId = setTimeout(function() {
+      if (recognizing) {
+        recognition.stop();
       }
-    }
+    }, 2000);
+    };
 
-    gptPrompt.value += interim_transcript;
-  };
+    //gptPrompt.value += interim_transcript;
 
   micButton.onclick = function() {
     if (recognizing) {
