@@ -4,6 +4,7 @@
     "version": "1.0.0",
     "description": "Highlights a button on the webpage with the same name as the given keyword.",
     "permissions": [
+      "tabs",
       "activeTab",
       "http://localhost:3000/*",
       "speechRecognition",
