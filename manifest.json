@@ -4,7 +4,8 @@
     "version": "1.0",
     "description": "Highlights a button on the webpage with the same name as the given keyword.",
     "permissions": [
-      "activeTab"
+      "activeTab",
+      "http://localhost:3000/*"
     ],
     "action": {
       "default_icon": "icon.png",

@@ -56,22 +56,22 @@ if (!('webkitSpeechRecognition' in window)) {
 // connect to chat gpt with the prompt 
 document.getElementById('sendButton').addEventListener('click', function() {
     const promptText = document.getElementById('gptPrompt').value;
+    const prompt = `Answer in english: ${promptText}`;
     fetch('http://localhost:3000/send-prompt', {
-      mode: 'no-cors',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ prompt: promptText })
+      body: JSON.stringify({ prompt: prompt })
     })
     .then(response => response.json())
     .then(data => {
-      //console.log(data);
-      console.log(data.choices[0].text);
+      //console.log(data)
+      console.log("data: " + data.choices[0].text)
       document.getElementById('responseArea').innerText = data.choices[0].text;
     })
     .catch(error => {
-      console.error('Error:', error);
+      console.error('Error:', error.message);
       document.getElementById('responseArea').innerText = 'Error: ' + error.message;
     });
   });
