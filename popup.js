@@ -1,9 +1,24 @@
 // highlight the button
-document.getElementById('highlightButton').addEventListener('click', function() {
-    const keyword = document.getElementById('keywordInput').value;
-    chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
-        chrome.tabs.sendMessage(tabs[0].id, { action: 'highlightButton', keyword: keyword });
-    });
+// document.getElementById('highlightButton').addEventListener('click', function() {
+//     const keyword = document.getElementById('keywordInput').value;
+//     chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+//         chrome.tabs.sendMessage(tabs[0].id, { action: 'highlightButton', keyword: keyword });
+//     });
+// });
+
+document.getElementById('startNavigate').addEventListener('click', function() {
+  var testButton = document.getElementById('test-button');
+    if (testButton.style.border === '4px solid #C464FF') {
+        testButton.style.border = ''; // Revert to original or specify a different style
+    } else {
+        testButton.style.border = '4px solid #C464FF';
+    }
+});
+
+document.getElementById('test-button').addEventListener('click', function() {
+  var testButton = document.getElementById('test-button');
+  testButton.style.border = '';
+
 });
 
 // audio to text function
@@ -65,7 +80,7 @@ if (!('webkitSpeechRecognition' in window)) {
 
 
 // connect to chat gpt with the prompt 
-document.getElementById('sendButton').addEventListener('click', function() {
+document.getElementById('startNavigate').addEventListener('click', function() {
     const promptText = document.getElementById('gptPrompt').value;
     const prompt = `Answer in english: ${promptText}`;
     console.log(prompt)

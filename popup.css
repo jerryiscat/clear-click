@@ -1,6 +1,114 @@
+
 body {
-    width: 200px;
-  }
+  width: 200px;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+
+.container {
+  max-width: 200px;
+  margin: 0 auto;
+}
+
+.branding {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.branding .name {
+  height: 20px; 
+  width: auto;
+}
+
+.branding .logo {
+  height: 60px; 
+  width: auto;
+}
+
+
+.textarea-container {
+  display: flex;
+  align-items: center; 
+  position: relative;
+}
+
+#textarea-container {
+  border: 2px solid #40036F;
+  border-radius: 5px;
+  margin-top: 10px;
+  cursor: pointer;
+  background-color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  color: #40036F;
+}
+
+#gptPrompt, #startNavigate {
+  border: 2px solid #40036F;
+  border-radius: 5px;
+  margin-top: 10px;
+  cursor: pointer;
+  background-color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  color: #40036F;
+}
+
+
+
+#gptPrompt {
+  padding: 6px 12px;
+}
+
+#startNavigate {
+  padding: 2px 12px;
+}
+
+#test-button {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 6px 12px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+
+#micButton img {
+  margin-top: 10px;
+  height: 30px; 
+  width: 30px; 
+}
+
+#micBtn img {
+  margin-top: 10px;
+  height: 30px; 
+  width: 30px; 
+}
+
+
+#startNavigate.icon-button {
+  display: inline-flex;
+  align-items: center;
+}
+
+.icon {
+  height: 40px; 
+  width: 40px; 
+  margin-right: 5px;
+}
+
+
+
+
 /* Your existing styles go here */
 
 .loader {
@@ -47,8 +155,4 @@ span:nth-child(2) {
 
 span:nth-child(3) {
     animation-delay: 0.3s;
-}
-
-#sendButton {
-    margin-top: 20px; /* Adjust as needed */
 }
