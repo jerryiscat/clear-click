@@ -11,6 +11,11 @@ body {
   margin: 0 auto;
 }
 
+.icon-button-container {
+      display: flex;
+      align-items: center;
+ }
+
 .branding {
   display: flex;
   justify-content: space-between;
@@ -79,6 +84,7 @@ body {
   background: none;
   border: none;
   cursor: pointer;
+  display: flex;
 }
 
 

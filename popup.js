@@ -89,6 +89,7 @@ document.getElementById('startNavigate').addEventListener('click', async functio
 
 document.getElementById('test-button').addEventListener('click', function() {
   var testButton = document.getElementById('test-button');
+  console.log(localStorage.getItem('currentIndex'));
   testButton.style.border = '';
 });
   
