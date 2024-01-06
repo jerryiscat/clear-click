@@ -5,7 +5,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
       
         buttons.forEach(function(button) {
             if (button.textContent.toLowerCase().includes(keyword)) {
-            button.style.border = '2px solid red';
+            button.style.border = '4px solid #C464FF';
             } else {
             button.style.border = 'none';
             }
