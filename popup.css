@@ -70,6 +70,7 @@ body {
 
 #startNavigate {
   padding: 2px 12px;
+  margin-bottom: 30px;
 }
 
 #test-button {
@@ -162,4 +163,8 @@ span:nth-child(2) {
 
 span:nth-child(3) {
     animation-delay: 0.3s;
+}
+
+#myLink {
+  margin-left: 35px;
 }

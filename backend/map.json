@@ -38,6 +38,10 @@
       {
         "function": "University of Washington student Accessibility",
         "path": ["people-with-disabilities", "University of WA Accessibility"]
+      },
+      {
+        "function": "Business Waste",
+        "path": ["Work", "Business Waste"]
       }
     ]
   }

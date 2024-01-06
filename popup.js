@@ -66,11 +66,28 @@ document.getElementById('startNavigate').addEventListener('click', async functio
     .then(response => response.json())
     .then(data => {
       route = data
-      document.getElementById('responseArea').innerText = data;
+      //document.getElementById('responseArea').innerText = data;
+
+
+      let newHtml = "<ul style='margin-left: 0px;'>"; // Add margin-left style to the unordered list
+
+      route.forEach((value, index) => {
+          newHtml += `<li>Step ${index + 1}: ${value}</li>`;
+      });
+
+      newHtml += "</ul>";
+
+      // Assuming responseArea is an HTML element, set its innerHTML to the new HTML
+      document.getElementById('responseArea').innerHTML = newHtml;
+      let link = document.getElementById('myLink');
+      link.href = 'https://ecology.wa.gov/Waste-Toxics/Business-waste';
+      link.style.display = 'block';
     })
     .catch(error => {
       console.error('Error:', error.message);
       document.getElementById('responseArea').innerText = "Your input is unclear, please re-enter your input.";
+      let link = document.getElementById('myLink');
+      link.style.display = 'none';
     });
 
 
@@ -85,8 +102,8 @@ document.getElementById('startNavigate').addEventListener('click', async functio
 
     const firstStep = route[0];
     console.log(firstStep);
-    chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
-        chrome.tabs.sendMessage(tabs[0].id, { action: 'highlightButton', keyword: firstStep });
+    chrome.tabs.query({ active: true, currentWindow: true }, async function(tabs) {
+        await chrome.tabs.sendMessage(tabs[0].id, { action: 'highlightButton', keyword: firstStep });
     });
 
     var testButton = document.getElementById('test-button');

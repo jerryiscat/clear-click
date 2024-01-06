@@ -1,7 +1,9 @@
 console.log("content.js is running");
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    console.log("on Message is running")
     if (request.action === 'highlightButton') {
+        console.log("is highlight")
         const keyword = request.keyword.toLowerCase();
         const buttons = document.querySelectorAll('button, a');
 
@@ -9,8 +11,12 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
       
         buttons.forEach(function(button) {
             if (button.textContent.toLowerCase().includes(keyword)) {
+                console.log("anchor border:", button.style.border)
                 button.style.border = '4px solid #C464FF';
+                button.style.color = '#C464FF';
                 found = true;
+                console.log("found")
+                console.log(button.textContent.toLowerCase())
             } 
         });
 
