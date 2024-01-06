@@ -12,6 +12,7 @@ body {
 }
 
 .icon-button-container {
+        position: relative;
       display: flex;
       align-items: center;
  }
@@ -102,7 +103,7 @@ body {
 
 
 #startNavigate.icon-button {
-  display: inline-flex;
+  display: inline;
   align-items: center;
 }
 
@@ -124,12 +125,13 @@ body {
     transform: translate(-50%, -50%);
     display: flex;
     align-items: center;
+    left: calc(30% + 10px);
 
 }
 
 span {
-    height: 5px;
-    width: 5px;
+    height: 8px;
+    width: 8px;
     margin-top: 2px;
     border-radius: 50%;
     background-color: white;
@@ -141,10 +143,10 @@ span {
         transform: translateX(0);
     }
     25% {
-        transform: translateX(5px);
+        transform: translateX(15px);
     }
     50% {
-        transform: translateX(-5px);
+        transform: translateX(-15px);
     }
     100% {
         transform: translateX(0);

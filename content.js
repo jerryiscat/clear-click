@@ -16,7 +16,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 // handle click and update currentIndex
 document.addEventListener('click', function(event) {
         console.log(event.target.textContent);
-        if (event.target.textContent.toLowerCase().includes("learn more")) {
+        if (event.target.textContent.toLowerCase().includes("menu")) {
             var currentStoredIndex = parseInt(localStorage.getItem('currentIndex')) || 0;
             var newCurrentIndex = currentStoredIndex + 1;
             localStorage.setItem('currentIndex', newCurrentIndex.toString());
