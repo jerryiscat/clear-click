@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const axios = require('axios');
 const app = express();
 
-const website = "youtube";
+const website = "washington government website";
 
 require('dotenv').config();
 
@@ -19,20 +19,16 @@ const fs = require('fs');
 const jsonData = fs.readFileSync('map.json', 'utf8');
 const parsedData = JSON.parse(jsonData);
 let mappings;
-if (parsedData.website === website) {
-  mappings = parsedData.mappings;
-  console.log("Successfully found mapping.")
-  // mappings.forEach(mapping => {
-  //   const mappingObject = {
-  //     function: mapping.function,
-  //     path: mapping.path.join(" > ")
-  //   };
-  //   mappingsArray.push(mappingObject);
-  // });
-}  else {
-  console.log("No mappings found for the specified website.");
+for (const entry of parsedData) {
+  if (entry.website === website) {
+    mappings = entry.mappings;
+    console.log("Successfully found mapping for", website);
+    break; // Stop searching once a match is found
+  }
 }
-console.log("111");
+if (!mappings) {
+  console.log("No mappings found for the specified website:", website);
+}
 
 app.use(cors((req, callback) => {
   let corsOptions;
