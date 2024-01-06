@@ -69,7 +69,7 @@ document.getElementById('startNavigate').addEventListener('click', async functio
     })
     .catch(error => {
       console.error('Error:', error.message);
-      document.getElementById('responseArea').innerText = 'Error: ' + error.message;
+      document.getElementById('responseArea').innerText = "Your input is unclear, please re-enter your input.";
     });
 
     const firstStep = route[0];
