@@ -99,31 +99,57 @@ document.getElementById('startNavigate').addEventListener('click', async functio
       console.log('route is set to', route);
     });
     
+    // chrome.storage.local.set({ route: route }, function() {
+    //   console.log('route is set to', route[0]);
+    // });
 
-    const firstStep = route[0];
-    console.log(firstStep);
-    chrome.tabs.query({ active: true, currentWindow: true }, async function(tabs) {
-        await chrome.tabs.sendMessage(tabs[0].id, { action: 'highlightButton', keyword: firstStep });
-    });
+    // const firstStep = route[0];
+    // console.log(firstStep);
+    // chrome.tabs.query({ active: true, currentWindow: true }, async function(tabs) {
+    //     await chrome.tabs.sendMessage(tabs[0].id, { action: 'highlightButton', keyword: firstStep });
+    // });
 
-    var testButton = document.getElementById('test-button');
-    if (testButton.style.border === '4px solid #C464FF') {
-        testButton.style.border = ''; // Revert to original or specify a different style
-    } else {
-        testButton.style.border = '4px solid #C464FF';
-    }
-});
+    // chrome.tabs.query({ active: true, currentWindow: true }, async function(tabs) {
+    //   await chrome.tabs.sendMessage(tabs[0].id, { action: 'highlightButton', route: route });
+    // });
 
-document.getElementById('test-button').addEventListener('click', function() {
-  var testButton = document.getElementById('test-button');
-  testButton.style.border = '';
-
-  chrome.storage.local.get(['currentIndex', 'route'], function(result) {
-      currentIndex = result.currentIndex || 0; 
-      retrievedArray = result.route; 
-      console.log("index: ", currentIndex);
-      console.log(retrievedArray);
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+      const tabId = tabs[0].id;
+  
+      chrome.tabs.sendMessage(tabId, { action: 'getRoute', route: route }, function (response) {
+          console.log("1111");
+          console.log(response);
+          console.log("2222");
+  
+          // Handle the response if needed
+          if (response && response.success) {
+              console.log("Button highlighted successfully");
+          } else {
+              console.error("An error occurred while highlighting the button");
+          }
+      });
   });
-});
+  });
+
+
+    // var testButton = document.getElementById('test-button');
+    // if (testButton.style.border === '4px solid #C464FF') {
+    //     testButton.style.border = ''; // Revert to original or specify a different style
+    // } else {
+    //     testButton.style.border = '4px solid #C464FF';
+    // }
+//});
+
+// document.getElementById('test-button').addEventListener('click', function() {
+//   var testButton = document.getElementById('test-button');
+//   testButton.style.border = '';
+
+//   chrome.storage.local.get(['currentIndex', 'route'], function(result) {
+//       currentIndex = result.currentIndex || 0; 
+//       retrievedArray = result.route; 
+//       console.log("index: ", currentIndex);
+//       console.log(retrievedArray);
+//   });
+// });
   
 
