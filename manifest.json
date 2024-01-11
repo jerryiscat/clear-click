@@ -1,6 +1,6 @@
 {
     "manifest_version": 3,
-    "name": "Button Highlighter",
+    "name": "Clear Click",
     "version": "1.0.0",
     "description": "Highlights a button on the webpage with the same name as the given keyword.",
     "permissions": [
@@ -8,7 +8,9 @@
       "activeTab",
       "http://localhost:3000/*",
       "speechRecognition",
-      "storage"
+      "storage",
+      "webNavigation",
+      "alarms"
     ],
     "action": {
       "default_icon": "icon.png",
@@ -26,8 +28,5 @@
     ],
     "background": {
       "service_worker": "background.js"
-    },
-    "content_security_policy": {
-      "extension_pages": "script-src 'self'; object-src 'self'"
     }
 }

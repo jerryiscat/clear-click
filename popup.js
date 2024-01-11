@@ -99,37 +99,89 @@ document.getElementById('startNavigate').addEventListener('click', async functio
       console.log('route is set to', route);
     });
     
-    // chrome.storage.local.set({ route: route }, function() {
-    //   console.log('route is set to', route[0]);
-    // });
+  //   chrome.runtime.sendMessage({ action: 'setRoute', route: route }, function(response) {
+  //     try {
+  //         if (chrome.runtime.lastError) {
+  //             console.error('Error in sending message:', chrome.runtime.lastError);
+  //         } else if (response && response.success) {
+  //             console.log('Route set successfully');
+  //         } else {
+  //             console.error('Error setting route');
+  //         }
+  //     } catch (error) {
+  //         console.error('An error occurred:', error);
+  //     }
+  // });
 
-    // const firstStep = route[0];
-    // console.log(firstStep);
-    // chrome.tabs.query({ active: true, currentWindow: true }, async function(tabs) {
-    //     await chrome.tabs.sendMessage(tabs[0].id, { action: 'highlightButton', keyword: firstStep });
-    // });
+    chrome.tabs.query({ active: true, currentWindow: true }, async function(tabs) {
+        await chrome.tabs.sendMessage(tabs[0].id, { action: 'getRoute', route: route });
+    });
 
     // chrome.tabs.query({ active: true, currentWindow: true }, async function(tabs) {
     //   await chrome.tabs.sendMessage(tabs[0].id, { action: 'highlightButton', route: route });
     // });
 
-    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-      const tabId = tabs[0].id;
+  //   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+  //     const tabId = tabs[0].id;
   
-      chrome.tabs.sendMessage(tabId, { action: 'getRoute', route: route }, function (response) {
-          console.log("1111");
-          console.log(response);
-          console.log("2222");
+  //     chrome.tabs.sendMessage(tabId, { action: 'getRoute', route: route }, function (response) {
+  //         console.log("1111");
+  //         console.log(response);
+  //         console.log("2222");
   
-          // Handle the response if needed
-          if (response && response.success) {
-              console.log("Button highlighted successfully");
-          } else {
-              console.error("An error occurred while highlighting the button");
-          }
-      });
-  });
-  });
+  //         // Handle the response if needed
+  //         if (chrome.runtime.lastError) {
+  //             console.error("Error in sending message:", chrome.runtime.lastError);
+  //         } else if (response && response.success) {
+  //             console.log("Button highlighted successfully");
+  //         } else {
+  //             console.error("An error occurred while highlighting the button");
+  //         }
+  //     });
+  // });
+
+
+//   // executeScript, without manifest.
+//   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+//     const tabId = tabs[0].id;
+  
+//     chrome.scripting.executeScript({
+//         target: { tabId: tabId },
+//         function: function () {
+//             // Your content script logic goes here
+//             console.log("1111");
+
+//             chrome.runtime.sendMessage({ action: 'getRoute', route: route }, function (response) {
+//                 console.log("2222");
+//                 console.log(response);
+
+//                 // Handle the response if needed
+//                 if (chrome.runtime.lastError) {
+//                     console.error("Error in sending message:", chrome.runtime.lastError);
+//                 } else if (response && response.success) {
+//                     console.log("Button highlighted successfully");
+//                 } else {
+//                     console.error("An error occurred while highlighting the button");
+//                 }
+//             });
+//         },
+//     });
+// });
+
+
+
+    // chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    //   const tabId = tabs[0].id;
+    //   console.log("1111");
+    //   chrome.tabs.sendMessage(tabId, { action: 'getRoute', route: route });
+    //   if (chrome.runtime.lastError) {
+    //     console.error("Error in sending message:", chrome.runtime.lastError);
+    //   }
+    //   console.log("2222");
+    // });
+
+
+});
 
 
     // var testButton = document.getElementById('test-button');

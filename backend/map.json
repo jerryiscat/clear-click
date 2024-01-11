@@ -4,7 +4,7 @@
     "mappings": [
       {
         "function": "subscribe to premium",
-        "path": ["sidebar", "youtube premium", "try it free", "select", "confirm", "select", "start 1-month trial", "input"]
+        "path": ["settings", "Get Youtube Premium"]
       },
       {
         "function": "back to homepage",
@@ -16,11 +16,15 @@
       },
       {
         "function": "turn on notification",
-        "path": ["sidebar", "settings", "notifications", "get notifications in this browser"]
+        "path": ["settings", "notifications"]
       },
       {
         "function": "change language",
         "path": ["profile", "language: english", "select"]
+      },
+      {
+        "function": "Delete Channel",
+        "path": ["settings", "Advanced settings", "delete channel"]
       }
     ]
   },
@@ -42,6 +46,15 @@
       {
         "function": "Business Waste",
         "path": ["Work", "Business Waste"]
+      }
+    ]
+  },
+  {
+    "website": "USCIS",
+    "mappings": [
+      {
+        "function": "Change of Address",
+        "path": ["tools", "Change of Address", "USCIS online account,"]
       }
     ]
   }
